@@ -41,6 +41,34 @@ $hotels = [
 
 ];
 
+$filtered_hotels = $hotels;
+
+if (isset($_GET['parking']) && $_GET['parking'] != '') {
+
+    // Array temporaneo
+    $newHotels = [];
+
+    // Recupero il valore della select
+    $parking = $_GET['parking'];
+
+    // Funzione di filter var che converte la stringa in valore booleano
+    $parking = filter_var($parking, FILTER_VALIDATE_BOOLEAN);
+
+    // Ciclo l'array degli hotel
+    foreach ($filtered_hotels as $hotel) {
+
+        // Applico la condizione agli hotel
+        if ($hotel['parking'] == $parking) {
+
+            // Aggiungo gli oggetti filtrati dentro l'array
+            $newHotels[] = $hotel;
+        };
+    }
+
+    // Ri-popolo l'array degli hotel filtrati con quello temporaneo
+    $filtered_hotels = $newHotels;
+}
+
 
 
 ?>
@@ -66,8 +94,26 @@ $hotels = [
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-12">
 
+                <!-- PARKINGFORM -->
+                <div class="col-6 mt-4">
+                    <form action="./index.php" method="GET">
+                        <div>
+                            <label for="parking" class=" form-label text-white">Parcheggio:</label>
+                            <select class="w-25 form-select " name="parking" id="parking">
+                                <option value="">Parcheggio</option>
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div class="pt-4">
+                            <button type="submit" class="btn btn-secondary">Filtra</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- HOTEL INFORMATION TABLE -->
+                <div class="col-12">
                     <div class="my-5">
                         <table class="table text-center">
                             <thead>
@@ -80,7 +126,7 @@ $hotels = [
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($hotels as $hotel) { ?>
+                                <?php foreach ($filtered_hotels as $hotel) { ?>
                                     <tr>
                                         <td> <?php echo $hotel['name'] ?></td>
                                         <td> <?php echo $hotel['description'] ?></td>
@@ -92,8 +138,8 @@ $hotels = [
                             </tbody>
                         </table>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </main>
