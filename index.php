@@ -43,6 +43,7 @@ $hotels = [
 
 $filtered_hotels = $hotels;
 
+// Filtraggio parcheggi
 if (isset($_GET['parking']) && $_GET['parking'] != '') {
 
     // Array temporaneo
@@ -57,7 +58,7 @@ if (isset($_GET['parking']) && $_GET['parking'] != '') {
     // Ciclo l'array degli hotel
     foreach ($filtered_hotels as $hotel) {
 
-        // Applico la condizione agli hotel
+        // Applico la condizione agli hotel filtrati
         if ($hotel['parking'] == $parking) {
 
             // Aggiungo gli oggetti filtrati dentro l'array
@@ -68,6 +69,31 @@ if (isset($_GET['parking']) && $_GET['parking'] != '') {
     // Ri-popolo l'array degli hotel filtrati con quello temporaneo
     $filtered_hotels = $newHotels;
 }
+
+// Filtraggio valutazione
+if (isset($_GET['vote']) && $_GET['vote'] != '') {
+
+    // Array temporaneo
+    $newHotels = [];
+
+    // Recupero il valore della select
+    $vote = $_GET['vote'];
+
+    // Ciclo l'array degli hotel filtrati
+    foreach ($filtered_hotels as $hotel) {
+
+        // Applico la condizione agli hotel
+        if ($hotel['vote'] >= $vote) {
+
+            // Aggiungo gli oggetti filtrati dentro l'array
+            $newHotels[] = $hotel;
+        };
+    }
+
+    // Ri-popolo l'array degli hotel filtrati con quello temporaneo
+    $filtered_hotels = $newHotels;
+}
+
 
 
 
@@ -98,6 +124,7 @@ if (isset($_GET['parking']) && $_GET['parking'] != '') {
                 <!-- PARKINGFORM -->
                 <div class="col-6 mt-4">
                     <form action="./index.php" method="GET">
+
                         <div>
                             <label for="parking" class=" form-label text-white">Parcheggio:</label>
                             <select class="w-25 form-select " name="parking" id="parking">
@@ -106,7 +133,20 @@ if (isset($_GET['parking']) && $_GET['parking'] != '') {
                                 <option value="false">No</option>
                             </select>
                         </div>
-                        <div class="pt-4">
+
+                        <div class="py-4">
+                            <label for="vote" class="form-label text-white">Voto:</label>
+                            <select class="w-25 form-select " name="vote" id="vote">
+                                <option value="">Valutazione:</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+
+                        <div>
                             <button type="submit" class="btn btn-secondary">Filtra</button>
                         </div>
                     </form>
