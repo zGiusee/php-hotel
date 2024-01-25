@@ -59,13 +59,17 @@ $hotels = [
 </head>
 
 <body>
+    <!-- HEADER -->
+    <?php include './header.php' ?>
+
+    <!-- MAIN -->
     <main>
         <div class="container">
             <div class="row">
                 <div class="col-12">
 
                     <div class="my-5">
-                        <table class="table table-dark text-center">
+                        <table class="table text-center">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -93,6 +97,9 @@ $hotels = [
             </div>
         </div>
     </main>
+
+    <!-- FOOTER -->
+    <?php include './footer.php' ?>
 </body>
 
 </html>

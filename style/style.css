@@ -1,5 +1,33 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+main {
+    background-color: rgb(20, 20, 20);
+    min-height: 72vh;
+}
+
+header {
+    background-color: #8cfff0;
+    color: rgb(20, 20, 20);
+}
+
+/* Footer */
+footer {
+    background-color: #8cfff0;
+    color: rgb(20, 20, 20);
+    text-align: center;
+    padding: 20px;
+}
+
+footer a {
+    color: rgb(20, 20, 20);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
